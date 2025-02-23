@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const url = process.env.MONGODB_URI;
+const url = process.env.NEXT_PUBLIC_REACT_APP_STAGE === "prod" ? process.env.MONGODB_URI_PROD : process.env.MONGODB_URI_DEV;
 if (!url) {
   throw new Error("Please define the MONGODB_URI environment variable");
 }

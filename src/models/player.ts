@@ -55,6 +55,10 @@ const playerSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    school: {
+        type: String,
+        required: true
+    },
     height: {
         feet: { type: Number, required: true, min: 0 },
         inches: { type: Number, required: true, min: 0, max: 11 },
@@ -106,7 +110,10 @@ const playerSchema = new mongoose.Schema({
         type: [eventSchema],
         required: true
     },
-    dateCreated: Date,
+    dateCreated: {
+        type: Date,
+        default: Date.now,
+    },
     dateUpdated: Date,
     dateDeleted: Date
 

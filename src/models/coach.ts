@@ -27,12 +27,16 @@ const coachSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    dateCreated: Date,
+    dateCreated: {
+        type: Date,
+        default: Date.now,
+    },
     dateUpdated: Date,
     dateDeleted: Date,
     activated: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false,
     }
 })
 

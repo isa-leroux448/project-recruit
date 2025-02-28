@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { InferSchemaType } from 'mongoose'
 
 const teamSchema = new mongoose.Schema({
     teamName: {type: String, required: true},
@@ -119,6 +119,5 @@ const playerSchema = new mongoose.Schema({
 
 })
 
-const Player = mongoose.model('Player', playerSchema, 'Players');
-
-export default Player;
+export const Player = mongoose.model("Player", playerSchema, 'Players');
+export type PlayerType = InferSchemaType<typeof playerSchema>;

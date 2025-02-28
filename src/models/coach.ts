@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { InferSchemaType } from 'mongoose'
 
 const coachSchema = new mongoose.Schema({
     firstName: {
@@ -40,6 +40,5 @@ const coachSchema = new mongoose.Schema({
     }
 })
 
-const Coach = mongoose.model('Coach', coachSchema, 'Coaches');
-
-export default Coach;
+export const Coach = mongoose.model("Coach", coachSchema, 'Coaches');
+export type CoachType = InferSchemaType<typeof coachSchema>;

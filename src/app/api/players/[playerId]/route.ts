@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/db";
-import Player from "@/models/player";
-import { checkAPIKey } from "@/app/util/checkAPIkey";
+import { Player } from "@/models/player";
+import { checkAPIKey } from "@/util/checkAPIkey";
 
 export async function GET(request: Request, { params }: { params: {playerId: string} }) {
     await connectDB();

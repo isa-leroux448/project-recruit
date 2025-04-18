@@ -119,5 +119,5 @@ const playerSchema = new mongoose.Schema({
 
 })
 
-export const Player = mongoose.model("Player", playerSchema, 'Players');
+export const Player = mongoose.models.Player || mongoose.model("Player", playerSchema, 'Players');
 export type PlayerType = InferSchemaType<typeof playerSchema>;

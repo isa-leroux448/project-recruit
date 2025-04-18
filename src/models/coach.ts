@@ -40,5 +40,5 @@ const coachSchema = new mongoose.Schema({
     }
 })
 
-export const Coach = mongoose.model("Coach", coachSchema, 'Coaches');
+export const Coach = mongoose.models.Coach || mongoose.model("Coach", coachSchema, 'Coaches');
 export type CoachType = InferSchemaType<typeof coachSchema>;

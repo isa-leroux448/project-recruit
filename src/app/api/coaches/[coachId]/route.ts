@@ -19,7 +19,7 @@ export async function PATCH(request: Request, context: any) {
             { _id: coachId },
             { activated: true },
             { new: true, lean: true }
-        );
+        ) as CoachType | null;
         if (!updatedCoach) {
             return NextResponse.json({ success: false, message: 'Coach not found' }, { status: 404 });
         }

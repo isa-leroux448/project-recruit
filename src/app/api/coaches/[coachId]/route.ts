@@ -26,7 +26,7 @@ export async function PATCH(request: Request, context: any) {
         if (!(status === "approved" || status === "denied")) {
             return NextResponse.json({ success: false, message: 'Invalid or missing parameters' }, { status: 400 });
         }
-        sendDecisionEmail(updatedCoach, status)
+        await sendDecisionEmail(updatedCoach, status)
         return NextResponse.json({ success: true, data: updatedCoach }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ success: false, error: (error as Error).message }, { status: 400 });

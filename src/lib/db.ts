@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
+import { MONGODB_URI } from "./set-env";
 
-const url = process.env.NEXT_PUBLIC_REACT_APP_STAGE === "prod" ? process.env.MONGODB_URI_PROD : process.env.MONGODB_URI_DEV;
-if (!url) {
+
+if (!MONGODB_URI) {
   throw new Error("Please define the MONGODB_URI environment variable");
 }
 
@@ -14,7 +15,7 @@ async function connectDB() {
   }
 
   try {
-    await mongoose.connect(String(url));
+    await mongoose.connect(String(MONGODB_URI));
     isConnected = true;
     console.log("Successfully connected to MongoDB using Mongoose");
   } catch (err) {

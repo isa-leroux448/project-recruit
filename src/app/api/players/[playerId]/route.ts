@@ -3,8 +3,10 @@ import connectDB from "@/lib/db";
 import { Player } from "@/models/player";
 import { checkAPIKey } from "@/util/checkAPIkey";
 
-export async function GET(request: Request, { params }: { params: {playerId: string} }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function GET(request: Request, context: any) {
     await connectDB();
+    const { params } = context;
     const { playerId } = await params;
     try {
         if (!checkAPIKey(request)) {

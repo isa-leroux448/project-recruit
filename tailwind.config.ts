@@ -10,6 +10,11 @@ export default {
   theme: {
   	extend: {
   		colors: {
+			blue: '#2B42C5',
+			green: '#75F296',
+			lightGrey: '#F6F6F6',
+			white: '#ffffff',
+			black: '#000000',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -55,7 +60,31 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		fontFamily: {
+			jockey: "var(--font-jockey), sans-serif",
+			geist: ['Geist', 'sans-serif'],
+		},
+		fontWeight: {
+			'100': '100',
+			'200': '200',
+			'300': '300',
+			'400': '400',
+			'500': '500',
+			'600': '600',
+			'700': '700',
+			'800': '800',
+			bold: '700',
+		},
+		fontSize: {
+			xs: '14px',
+			sm: '16px',
+			md: '20px',
+			lg: '24px',
+			xl: '32px',
+			'2xl': '40px',
+			'3xl': '48px',
+		},
   	}
   },
   plugins: [require("tailwindcss-animate")],

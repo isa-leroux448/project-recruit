@@ -1,17 +1,17 @@
-import * as FormData from "form-data";
+import FormData from "form-data";
 import Mailgun from 'mailgun.js';
 import { CoachType } from "@/models/coach";
+import { DOMAIN } from "./set-env";
 
 export async function sendAccountRequest(coachInfo: CoachType) {
   const mailgun = new Mailgun(FormData);
   const mg = mailgun.client({
     username: "api",
-    key: process.env.MAILGUN_API_KEY
+    key: process.env.MAILGUN_API_KEY as string
   });
   try {
-    const domain = process.env.NEXT_PUBLIC_REACT_APP_STAGE === "prod" ? process.env.DOMAIN_PROD : process.env.DOMAIN_DEV;
-    const data = await mg.messages.create(domain, {
-      from: `Project Recruit <noreply@${domain}>`,
+    await mg.messages.create(DOMAIN as string, {
+      from: `Project Recruit <noreply@${DOMAIN}>`,
       to: (process.env.ADMIN_EMAILS?.split(',').map(email => email.trim()) || ["Isabella Leroux <isabella.leroux.dev@gmail.com>"]),
       subject: `New account request - ${coachInfo.firstName} ${coachInfo.lastName}`,
       template: "account request",
@@ -23,7 +23,6 @@ export async function sendAccountRequest(coachInfo: CoachType) {
         position: coachInfo.position
       }),
     });
-    console.log(data);
   } catch (error) {
     console.log(error);
   }
@@ -33,14 +32,13 @@ export async function sendDecisionEmail(coachInfo: CoachType, status: "approved"
   const mailgun = new Mailgun(FormData);
   const mg = mailgun.client({
     username: "api",
-    key: process.env.MAILGUN_API_KEY
+    key: process.env.MAILGUN_API_KEY as string
   });
   try {
-    const domain = process.env.NEXT_PUBLIC_REACT_APP_STAGE === "prod" ? process.env.DOMAIN_PROD : process.env.DOMAIN_DEV;
     const subject = status === "approved" ? "Your account has been approved!" : "Your account request has been denied";
     const template = status === "approved" ? "account approved" : "account denied";
-    const data = await mg.messages.create(domain, {
-      from: `Project Recruit <noreply@${domain}>`,
+    await mg.messages.create(DOMAIN as string, {
+      from: `Project Recruit <noreply@${DOMAIN}>`,
       to: [`${coachInfo.firstName} ${coachInfo.lastName} <${coachInfo.email}>`],
       subject,
       template,
@@ -52,7 +50,6 @@ export async function sendDecisionEmail(coachInfo: CoachType, status: "approved"
         position: coachInfo.position
       }),
     });
-    console.log(data);
   } catch (error) {
     console.log(error);
   }

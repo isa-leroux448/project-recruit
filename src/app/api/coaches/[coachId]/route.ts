@@ -4,12 +4,14 @@ import { checkAPIKey } from "@/util/checkAPIkey";
 import { Coach, CoachType } from "@/models/coach";
 import { sendDecisionEmail } from "@/lib/sendEmails";
 
-export async function PUT(request: Request, { params }: { params: {coachId: string} }) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function PATCH(request: Request, context: any) {
     try {
         await connectDB();
         if (!checkAPIKey(request)) {
             return NextResponse.json({ success: false, error: 'Invalid or missing API key' }, { status: 401 });
         }
+        const { params } = context;
         const { coachId } = await params;
         const url = new URL(request.url);
         const status = url.searchParams.get("status");
